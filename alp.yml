@@ -1,0 +1,6 @@
+matching_groups:
+   - /api/condition/[^/]+
+   - /api/isu/[^/]+
+   - /isu/[^/]+
+ sort: p99
+ reverse: true
