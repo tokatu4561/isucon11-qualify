@@ -17,6 +17,8 @@ import (
 	"strings"
 	"time"
 
+	_ "net/http/pprof"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-sql-driver/mysql"
 	"github.com/gorilla/sessions"
@@ -207,6 +209,10 @@ func init() {
 }
 
 func main() {
+	go func() {
+		log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
+
 	e := echo.New()
 	e.Debug = true
 	e.Logger.SetLevel(log.DEBUG)
@@ -1167,7 +1173,7 @@ func postIsuCondition(c echo.Context) error {
 
 	jiaIsuUUID := c.Param("jia_isu_uuid")
 	if jiaIsuUUID == "" {
-		return c.String(http.StatusBadRequest, "missing: jia_isu_uuid")
+		return c.String(http.SlstatusBadRequest, "missing: jia_isu_uuid")
 	}
 
 	req := []PostIsuConditionRequest{}
