@@ -1169,7 +1169,7 @@ func postIsuCondition(c echo.Context) error {
 
 	jiaIsuUUID := c.Param("jia_isu_uuid")
 	if jiaIsuUUID == "" {
-		return c.String(http.SlstatusBadRequest, "missing: jia_isu_uuid")
+		return c.String(http.StatusBadRequest, "missing: jia_isu_uuid")
 	}
 
 	req := []PostIsuConditionRequest{}
