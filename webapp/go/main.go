@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	pprof_log "log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -209,6 +210,10 @@ func init() {
 }
 
 func main() {
+	go func() {
+		pprof_log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
+
 	e := echo.New()
 	e.Debug = true
 	e.Logger.SetLevel(log.DEBUG)
